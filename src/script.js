@@ -11,18 +11,23 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+scene.background = new THREE.Color(0xfffccc)
 
 // Objects
-const geometry = new THREE.TorusGeometry( .7, .2, 16, 100 );
+// const geometry = new THREE.TorusGeometry( 1, .3, 16, 100 );
+const geometry2 = new THREE.BoxGeometry( .5, 1, 1 ); 
+const material2 = new THREE.MeshBasicMaterial( {color: 0xcccccc} );
+// material2.color = new THREE.Color(0xff0000);
+const cube = new THREE.Mesh( geometry2, material2 ); 
+scene.add( cube );
 
-// Materials
+// // Materials
+// const material = new THREE.MeshBasicMaterial()
+// material.color = new THREE.Color(0xff0000)
 
-const material = new THREE.MeshBasicMaterial()
-material.color = new THREE.Color(0xff0000)
-
-// Mesh
-const sphere = new THREE.Mesh(geometry,material)
-scene.add(sphere)
+// // Mesh
+// const sphere = new THREE.Mesh(geometry,material)
+// scene.add(sphere)
 
 // Lights
 
@@ -62,12 +67,12 @@ window.addEventListener('resize', () =>
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 0
 camera.position.y = 0
-camera.position.z = 2
+camera.position.z = 3
 scene.add(camera)
 
 // Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
 
 /**
  * Renderer
@@ -89,8 +94,8 @@ const tick = () =>
 
     const elapsedTime = clock.getElapsedTime()
 
-    // Update objects
-    sphere.rotation.y = .5 * elapsedTime
+    // // Update objects
+    // sphere.rotation.y = .5 * elapsedTime
 
     // Update Orbital Controls
     // controls.update()
